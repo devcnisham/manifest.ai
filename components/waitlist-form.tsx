@@ -23,7 +23,7 @@ export function WaitlistForm({ id }: { id?: string }) {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, idea: data.get("idea") }),
+        body: JSON.stringify({ email }),
       });
       const result = await response.json();
       if (!response.ok)
@@ -96,27 +96,12 @@ export function WaitlistForm({ id }: { id?: string }) {
             </Button>
           </div>
         </div>
-        <div className="idea-row">
-          <label htmlFor={`${uid}-idea`}>
-            What are you building? <span>(optional)</span>
-          </label>
-          <input
-            id={`${uid}-idea`}
-            name="idea"
-            placeholder="A habit tracker, a booking app…"
-            maxLength={1000}
-            disabled={pending}
-          />
-        </div>
       </form>
       {message && (
         <p className="form-error" role="alert">
           {message}
         </p>
       )}
-      <p className="form-note">
-        No spam. We’ll email you when early access opens.
-      </p>
     </div>
   );
 }

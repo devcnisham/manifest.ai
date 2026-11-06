@@ -9,7 +9,8 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 35);
+    const onScroll = () =>
+      setScrolled(window.scrollY > Math.min(window.innerHeight * 0.65, 560));
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -25,8 +26,14 @@ export function Header() {
           <a href="#features" onClick={() => setOpen(false)}>
             Features
           </a>
+          <a href="#how-it-works" onClick={() => setOpen(false)}>
+            How it works
+          </a>
           <a href="#who-its-for" onClick={() => setOpen(false)}>
-            Who it’s for
+            For builders
+          </a>
+          <a href="#pricing" onClick={() => setOpen(false)}>
+            Pricing
           </a>
           <a href="#faq" onClick={() => setOpen(false)}>
             FAQ

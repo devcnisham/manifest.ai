@@ -1,6 +1,6 @@
 # Manifest AI
 
-A pre-launch Next.js App Router site for Manifest AI. The landing page follows the supplied Lovable reference: Bricolage Grotesque + Geist, a peach/sky/mint gradient grid, floating navigation, a prompt-style waitlist form, and a CSS/component-only illustrative workspace. Fonts are self-hosted with their OFL licenses. All product features are labeled as planned; the workspace is an illustration.
+A pre-launch Next.js App Router site for Manifest AI. The current visual direction is inspired by the supplied justski.it reference: a cinematic dark hero, original cinematic brand artwork, floating pill navigation, self-hosted Inter Tight typography, and large editorial sections. The app preview remains removed. Individual, Teams, Students, and Hackathons are proposed pricing audiences; all product capabilities are labeled as planned.
 
 ## Stack
 
@@ -112,3 +112,15 @@ With your configured Supabase project, verify the actual integration:
 - Basic rate limiting is process-local. Vercel instances do not share memory and deployments reset limits. Add a shared Redis limiter or Vercel WAF rule for robust protection before a high-traffic launch. Vercel's trusted forwarding header is used in production; configure trusted proxy headers on other hosts.
 - Enable Google OAuth only when its provider is configured.
 - The favicon and social card are starter brand assets. Product integrations, pricing, billing, and actual project-building features are intentionally outside this pre-launch site.
+
+## Landing page refinement
+
+The marketing page includes a clearer product story, an editorial build-to-launch path, a three-step workflow, six planned capabilities, a clearly illustrative readiness assessment, grouped planned integrations, builder use cases, explicit early-access expectations, eight FAQ answers, and a full navigation footer. The mock app preview remains removed. The visual system keeps the reference-inspired soft colors and self-hosted typography with consistent responsive spacing and system-aware light/dark mode.
+
+Pricing presents proposed Individual, Teams, Students, and Hackathons plans with amounts and billing terms coming soon. All plan buttons join the waitlist; there is no checkout or paid-plan selection. Final pricing and limits remain to be decided.
+
+## Cinematic design direction
+
+`components/cinematic-hero.tsx` and `app/cinematic.css` contain the reference-inspired hero and visual layer. The hero and editorial illustration are original generated images stored as optimized WebP files under `public/images/`; prompts and provenance are in `docs/generated-visuals.md`. There are no app screenshots. The existing waitlist, account routes, and all four proposed plan cards remain. Motion respects reduced-motion preferences.
+
+The optional idea fields, visible hero heading block, and footer Back to top link were removed following annotated feedback. The hero retains a screen-reader heading. Scroll reveals, staggered pricing cards, image parallax, hover/focus feedback, and button press states respect reduced-motion preferences. The waitlist forms collect only email; the API still accepts an optional idea for compatibility.

@@ -16,10 +16,6 @@ export default function Privacy() {
         data handling, code access, retention, and your privacy choices before
         early access opens.
       </p>
-      <p>
-        Please avoid sharing confidential information in the optional “What are
-        you building?” field.
-      </p>
       <Link href="/">← Back to Manifest</Link>
     </main>
   );

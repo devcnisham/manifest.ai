@@ -1,513 +1,86 @@
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Blocks,
-  Check,
-  CheckCheck,
-  ChevronDown,
-  Code2,
-  FileText,
-  Flag,
-  GitBranch,
-  GitFork,
-  GraduationCap,
-  Layers,
-  Lightbulb,
-  Link2,
-  ListChecks,
-  Rocket,
-  ShieldCheck,
-  Sparkles,
-  Store,
-  Target,
-  Terminal,
-  Users,
-  WandSparkles,
-  Workflow,
-  Wrench,
-} from "lucide-react";
-import { Header } from "@/components/header";
-import { Brand } from "@/components/brand";
-import { WaitlistForm } from "@/components/waitlist-form";
-import { ProductPreview } from "@/components/product-preview";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Check, ChevronDown, FileText, Layers, LockKeyhole, Rocket, ScanLine, Target, Workflow } from "lucide-react";
+import { Brand, Mark } from "@/components/brand";
 import { Reveal } from "@/components/reveal";
-const features = [
-  {
-    icon: Target,
-    title: "MVP scope guardrail",
-    text: "Find your smallest shippable version. Keep the essentials in, and the “one more things” out.",
-    color: "purple",
-  },
-  {
-    icon: Workflow,
-    title: "Live blueprints",
-    text: "See how it all connects with architecture and user-flow diagrams that evolve with your idea.",
-    color: "blue",
-  },
-  {
-    icon: Link2,
-    title: "Linear & Jira sync",
-    text: "Turn a clear plan into actionable tasks, right where you already manage your work.",
-    color: "peach",
-  },
-  {
-    icon: FileText,
-    title: "Docs & decks",
-    text: "Take your thinking with you. Export project specs to Google Docs and pitch decks to Slides.",
-    color: "yellow",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Security checks",
-    text: "Catch exposed secrets and potential weak spots before your first users do.",
-    color: "mint",
-  },
-  {
-    icon: Store,
-    title: "Store pre-flight",
-    text: "Navigate App Store and Google Play requirements with a clear path to submission.",
-    color: "pink",
-  },
-];
-const audiences = [
-  {
-    icon: Terminal,
-    title: "Indie hackers & vibe coders",
-    text: "Less scope creep. More side projects that see daylight.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Technical founders",
-    text: "Go from a big vision to a focused first release.",
-  },
-  {
-    icon: GraduationCap,
-    title: "Students",
-    text: "Give your next big idea a real-world launch plan.",
-  },
-  {
-    icon: Users,
-    title: "Hackathon teams",
-    text: "Get aligned fast. Build what matters before time’s up.",
-  },
-  {
-    icon: Wrench,
-    title: "Freelancers",
-    text: "Keep client projects clear, contained, and moving.",
-  },
+import { StudioNavigation } from "@/components/studio-navigation";
+import { AgentStrips } from "@/components/agent-strips";
+import { ProjectExamples } from "@/components/project-examples";
+import { LaunchDeliverables } from "@/components/launch-deliverables";
+import { StudioHero } from "@/components/studio-hero";
+import { PricingSection } from "@/components/pricing-section";
+import { WaitlistForm } from "@/components/waitlist-form";
+import "./studio.css";
+const process = [
+    { number: "01", title: "Find the first release.", text: "Turn the big idea into a focused MVP. Keep the essentials close and give everything else a place in Phase 2.", result: "A scope you can build", icon: Target },
+    { number: "02", title: "Give the build direction.", text: "Connect the architecture, specs, and next steps while your AI coding tools handle implementation.", result: "A plan that travels with you", icon: Workflow },
+    { number: "03", title: "Make the next move clear.", text: "Work through security and launch requirements before sharing your project with its first users.", result: "A more considered launch", icon: Rocket },
 ];
 const faqs = [
-  [
-    "What is Manifest?",
-    "Manifest is a mission control workspace in development for people building with AI. It’s designed to guide your project from an initial idea to a live launch.",
-  ],
-  [
-    "Does it replace Cursor or Claude Code?",
-    "No. Keep coding with the tools you love. Manifest is being built to help with everything around the code: scope, planning, security, and launch readiness.",
-  ],
-  [
-    "When does it launch?",
-    "We’re building toward early access. There’s no confirmed launch date yet. Join the waitlist and we’ll let you know when it’s ready.",
-  ],
-  [
-    "Who is it for?",
-    "Indie hackers, founders, students, hackathon teams, and freelancers who use AI to build software and want a clearer path to shipping.",
-  ],
-  [
-    "Is my code safe?",
-    "We’ll publish details about code access, data handling, and security before launch, so you can make an informed decision.",
-  ],
+    ["What is Manifest AI?", "Manifest is an AI agent in development for the decisions around building software: project scope, architecture, task handoffs, and launch preparation. It is designed to help you take an idea toward a first release."],
+    ["Does Manifest write the code?", "Keep using your preferred AI coding tools for implementation. Manifest is being built to connect the scope, decisions, and launch work around that code. Planned compatibility includes Cursor, Claude Code, Windsurf, v0, and GitHub; availability will be confirmed at launch."],
+    ["When can I use it?", "There is no confirmed release date yet. Join the waitlist and we’ll email you when early access opens. The capabilities described here are planned and may change as we build."],
+    ["Are there plans for students and hackathons?", "Yes. We’re exploring plans for individuals, teams, students, and hackathons. Pricing, limits, and feature availability have not been finalized. Joining the waitlist does not commit you to a paid plan."],
+    ["What access will Manifest need to my project?", "Code permissions, supported connections, and data-handling details will be published before product access opens. Joining the email waitlist does not connect your repositories or grant access to your code."],
 ];
 export default function Home() {
-  return (
-    <>
-      <Header />
+    return (<div className="manifest-site">
+      <StudioNavigation />
       <main id="main">
-        <section className="hero">
-          <div className="hero-glow" aria-hidden="true" />
-          <div className="hero-content">
-            <div className="eyebrow launch-badge">
-              <span className="status-dot" /> Pre-launch · early access waitlist
-              open
-            </div>
-            <h1>
-              From prompt
-              <br />
-              to <span>production.</span>
-            </h1>
-            <p className="hero-subtitle">
-              Manifest keeps your AI-built project scoped, secure, and ready to
-              ship.
-            </p>
-            <WaitlistForm id="waitlist" />
-          </div>
-          <Reveal className="preview-container">
-            <div id="workspace">
-              <ProductPreview />
-            </div>
-          </Reveal>
-        </section>
-        <section className="intro-band">
-          <Reveal>
-            <h2>
-              One workspace.
-              <br className="mobile-break" /> From idea to launch.
-            </h2>
-            <p>
-              Describe your idea. Manifest asks the right questions, locks your
-              MVP, and guides
-              <br className="desktop-break" /> you through building, tracking,
-              and shipping.
-            </p>
-          </Reveal>
-          <div className="journey">
-            <span>
-              <Lightbulb /> The idea
-            </span>
-            <i />
-            <span>
-              <ListChecks /> The plan
-            </span>
-            <i />
-            <span>
-              <Code2 /> The build
-            </span>
-            <i />
-            <span>
-              <Rocket /> The launch
-            </span>
+        <StudioHero />
+        <AgentStrips />
+        <section className="studio-intro studio-light" id="the-launch-gap" aria-labelledby="intro-title">
+          <div className="studio-container">
+            <Reveal className="studio-intro-grid">
+              <div><h2 id="intro-title">The code is moving.<br />Let’s move the<br /><em>whole idea.</em></h2></div>
+              <div className="studio-intro-copy"><span className="studio-mini-mark"><Mark /></span><p className="studio-lead">Good code is only part of a great launch.</p><p>Manifest brings direction to everything around it. Shape the scope, connect the decisions, and keep a clear path from the first prompt to the first release.</p><a className="studio-text-link" href="#how-it-works">A little structure. A lot more clarity. <ArrowUpRight size={18}/></a></div>
+            </Reveal>
+            
           </div>
         </section>
-        <section className="section scope-section">
-          <Reveal className="two-column">
-            <div className="section-copy">
-              <span className="section-kicker">SCOPE GUARDRAIL</span>
-              <h2>
-                You bring the <br />
-                idea. Manifest <br />
-                keeps it shippable.
-              </h2>
-              <p>
-                The hardest part isn’t writing the code anymore.
-                <br className="desktop-break" /> It’s knowing what to build,
-                what to skip, and when to stop adding “just one more thing.”
-              </p>
-              <p>
-                Keep your day-one essentials in focus. Give the rest a place to
-                wait.
-              </p>
-              <a className="text-link" href="#waitlist">
-                Make room for your first launch <ArrowUpRight size={16} />
-              </a>
-            </div>
-            <div
-              className="scope-illustration"
-              aria-label="Illustration of an out-of-scope feature moved to a later phase"
-            >
-              <div className="scope-orbit orbit-one" />
-              <div className="scope-orbit orbit-two" />
-              <span className="floating-label">
-                <span className="status-dot" /> FOCUS MODE, ON.
-              </span>
-              <div className="scope-card">
-                <div className="scope-card-top">
-                  <span className="icon-box purple">
-                    <Flag size={19} />
-                  </span>
-                  <span className="tiny-label">SCOPE GUARDRAIL</span>
-                  <Sparkles size={16} />
-                </div>
-                <h3>Great idea. Next release.</h3>
-                <p>
-                  Your MVP doesn’t need to do everything.
-                  <br />
-                  It just needs to do the right things.
-                </p>
-                <div className="flagged-feature">
-                  <span>
-                    <Layers size={16} /> Dark mode
-                  </span>
-                  <span className="phase-tag">
-                    Moved to Phase 2 <ArrowRight size={12} />
-                  </span>
-                </div>
-                <div className="scope-card-bottom">
-                  <CheckCheck size={15} /> Day-1 scope stays on track.
-                </div>
-              </div>
-              <span className="scope-sticker">
-                <Check size={13} /> Ship the essentials first
-              </span>
-            </div>
-          </Reveal>
-        </section>
-        <section className="section features-section" id="features">
-          <Reveal className="section-heading">
-            <span className="section-kicker">FEATURES</span>
-            <h2>
-              Everything between code
-              <br />
-              and launch, handled.
-            </h2>
-            <p>Your coding tool writes the code. Manifest covers the rest.</p>
-          </Reveal>
-          <div className="feature-grid">
-            {features.map(({ icon: Icon, title, text, color }, i) => (
-              <Reveal key={title}>
-                <article className="feature-card">
-                  <div className="feature-top">
-                    <span className={`icon-box ${color}`}>
-                      <Icon size={21} strokeWidth={1.6} />
-                    </span>
-                    <span className="coming-badge">Coming soon</span>
-                  </div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                  <div className={`feature-mini mini-${i}`} aria-hidden="true">
-                    {i === 0 ? (
-                      <>
-                        <span>
-                          <Check size={11} /> Core features
-                        </span>
-                        <span className="mini-later">
-                          Nice-to-haves <ArrowRight size={11} /> Later
-                        </span>
-                      </>
-                    ) : i === 1 ? (
-                      <div className="mini-flow">
-                        <span>Idea</span>
-                        <i />
-                        <span>Blueprint</span>
-                        <i />
-                        <span>Build</span>
-                      </div>
-                    ) : i === 2 ? (
-                      <>
-                        <span className="linear-icon">◒</span>
-                        <span className="mini-dashes" />
-                        <GitBranch size={18} />
-                        <span className="mini-dashes" />
-                        <span className="jira-icon">◆</span>
-                      </>
-                    ) : i === 3 ? (
-                      <>
-                        <span className="mini-file">
-                          <FileText size={18} /> Your spec
-                        </span>
-                        <ArrowRight size={12} />
-                        <span className="mini-file yellow">
-                          <Blocks size={17} /> Your pitch
-                        </span>
-                      </>
-                    ) : i === 4 ? (
-                      <>
-                        <ShieldCheck size={17} />
-                        <span>Secrets stay secret.</span>
-                        <Check size={13} />
-                      </>
-                    ) : (
-                      <>
-                        <Store size={18} />
-                        <span>Ready for review</span>
-                        <span className="mini-steps">
-                          <i />
-                          <i />
-                          <i />
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+
+        <section className="studio-process studio-light" id="how-it-works" aria-labelledby="process-title">
+          <div className="studio-container">
+            <Reveal className="studio-section-heading"><div><h2 id="process-title">From possibility<br />to <em>a way forward.</em></h2></div><p>Three connected stages.<br />One project with a direction.</p></Reveal>
+            <div className="studio-process-grid">{process.map(({ number, title, text, result, icon: Icon }, index) => <Reveal key={number} delay={index * 0.1}><article className="studio-step"><div className="studio-step-track"><span>{number}</span><i /><Icon size={19}/></div><h3>{title}</h3><p>{text}</p><div className="studio-step-result"><Check size={14}/>{result}</div></article></Reveal>)}</div>
+            <p className="studio-disclosure">The intended workflow. Product capabilities are in development.</p>
           </div>
         </section>
-        <section className="section readiness-section">
-          <Reveal className="readiness-inner">
-            <div className="section-copy">
-              <span className="section-kicker">SHIP READINESS</span>
-              <h2>
-                Know when you’re <br />
-                ready to ship.
-              </h2>
-              <p>
-                “It runs on my machine” is a start. A launch takes a little
-                more.
-              </p>
-              <p>
-                The Ship Readiness Score brings your moving parts into one clear
-                picture, so you know what’s ready and what still needs a little
-                love.
-              </p>
-              <span className="readiness-note">
-                <ShieldCheck size={15} /> Built for confidence, before you go
-                live.
-              </span>
+
+        <section className="studio-capabilities" id="features" aria-labelledby="features-title">
+          <div className="studio-container">
+            <Reveal className="studio-section-heading"><div><h2 id="features-title">Fewer loose ends.<br /><em>More momentum.</em></h2></div><p>A workspace for the thinking<br />that makes the building count.</p></Reveal>
+            <div className="studio-feature-grid">
+              <Reveal className="studio-feature-wide"><article className="studio-feature studio-scope"><div className="studio-feature-copy"><Target size={24}/><h3>Keep the first version<br />within reach.</h3><p>Define day-one essentials. Park the good-but-not-yet ideas in a Phase 2 backlog.</p></div><div className="studio-scope-art" aria-hidden="true"><div className="scope-orbit scope-orbit-one"/><div className="scope-orbit scope-orbit-two"/><div className="scope-orbit scope-orbit-three"/><div className="scope-core"><Target size={35}/></div></div></article></Reveal>
+              <Reveal delay={0.08}><article className="studio-feature studio-blueprint"><Layers size={24}/><h3>See how it<br />comes together.</h3><p>Make architecture, flows, and project decisions easier to understand and carry forward.</p><div className="studio-blueprint-art" aria-hidden="true"><span /><i /><span /><i /><span /></div></article></Reveal>
+              <Reveal><article className="studio-feature studio-handoff"><FileText size={24}/><h3>Let the context<br />come with you.</h3><p>Bring plans into Linear and Jira, and turn project thinking into specs and decks for collaborators.</p><div className="studio-handoff-tools"><span>Linear</span><span>Jira</span><span>Docs</span><span>Slides</span></div></article></Reveal>
+              <Reveal className="studio-feature-wide" delay={0.08}><article className="studio-feature studio-readiness"><div className="studio-feature-copy"><ScanLine size={24}/><h3>Think beyond<br />“it runs locally.”</h3><p>Work through exposed secrets, infrastructure, and store requirements before your first release.</p></div><div className="studio-readiness-art" aria-hidden="true"><div className="readiness-ring"><LockKeyhole size={38} strokeWidth={1.2}/></div></div></article></Reveal>
             </div>
-            <div className="readiness-card">
-              <div className="panel-header">
-                <span>
-                  <Rocket size={16} /> Launch readiness
-                </span>
-                <span className="coming-badge">Illustration</span>
-              </div>
-              <div className="gauge">
-                <svg viewBox="0 0 240 132" aria-hidden="true">
-                  <path
-                    className="gauge-track"
-                    d="M25 115 A95 95 0 0 1 215 115"
-                  />
-                  <path
-                    className="gauge-progress"
-                    d="M25 115 A95 95 0 0 1 215 115"
-                    pathLength="100"
-                  />
-                </svg>
-                <div className="gauge-value">
-                  82<span>%</span>
-                  <small>SHIP READINESS SCORE</small>
-                </div>
-                <span className="gauge-min">0%</span>
-                <span className="gauge-max">100%</span>
-              </div>
-              <div className="readiness-categories">
-                {[
-                  ["Scope", 100],
-                  ["Build health", 90],
-                  ["Legal", 65],
-                  ["Store audit", 70],
-                  ["Infrastructure", 85],
-                ].map(([label, value]) => (
-                  <div className="category" key={label}>
-                    <span>{label}</span>
-                    <div className="category-track">
-                      <i style={{ width: `${value}%` }} />
-                    </div>
-                    <span>{value}%</span>
-                  </div>
-                ))}
-              </div>
-              <p className="illustration-note">
-                An example score, not a live project assessment.
-              </p>
-            </div>
-          </Reveal>
-        </section>
-        <section className="section tools-section">
-          <Reveal>
-            <span className="section-kicker">
-              YOUR TOOLKIT. NOW WITH A FLIGHT PLAN.
-            </span>
-            <h2>
-              Works with the tools
-              <br className="mobile-break" /> you already use.
-            </h2>
-            <p>Keep your flow. Manifest is designed to fit right in.</p>
-            <div className="tool-chips">
-              {[
-                { name: "Cursor", icon: ArrowUpRight },
-                { name: "Claude Code", icon: Sparkles },
-                { name: "Windsurf", icon: WandSparkles },
-                { name: "v0", icon: Code2 },
-                { name: "Linear", icon: CircleIcon },
-                { name: "Jira", icon: GitBranch },
-                { name: "Google Docs", icon: FileText },
-                { name: "Google Slides", icon: Blocks },
-                { name: "GitHub", icon: GitFork },
-              ].map(({ name, icon: Icon }) => (
-                <span className="tool-chip" key={name}>
-                  <Icon size={18} />
-                  {name}
-                </span>
-              ))}
-            </div>
-            <p className="tools-note">
-              Planned compatibility and integrations. Available features will be
-              confirmed at launch.
-            </p>
-          </Reveal>
-        </section>
-        <section className="section audience-section" id="who-its-for">
-          <Reveal className="section-heading">
-            <span className="section-kicker">WHO IT’S FOR</span>
-            <h2>Built for people who ship.</h2>
-            <p>Whether it’s your first project or your next big thing.</p>
-          </Reveal>
-          <div className="audience-grid">
-            {audiences.map(({ icon: Icon, title, text }) => (
-              <Reveal key={title}>
-                <article className="audience-card">
-                  <Icon size={23} strokeWidth={1.5} />
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </article>
-              </Reveal>
-            ))}
+            <p className="studio-disclosure">Planned capabilities and integrations. Availability will be confirmed as early access approaches.</p>
           </div>
         </section>
-        <section className="section faq-section" id="faq">
-          <Reveal className="faq-layout">
-            <div>
-              <span className="section-kicker">FAQ</span>
-              <h2>Questions, answered.</h2>
-              <p>Still early. Always transparent.</p>
-            </div>
-            <div className="faq-list">
-              {faqs.map(([q, a]) => (
-                <details key={q}>
-                  <summary>
-                    {q}
-                    <ChevronDown size={17} />
-                  </summary>
-                  <p>{a}</p>
-                </details>
-              ))}
-            </div>
-          </Reveal>
+
+        <LaunchDeliverables />
+
+        <section className="studio-editorial studio-light" id="who-its-for" aria-labelledby="builders-title">
+          <div className="studio-container">
+            <Reveal className="studio-editorial-heading"><h2 id="builders-title">Your next side project.<br />Your team’s big bet.<br /><em>Your “what if.”</em></h2><p>Solo builders. Founders. Student teams.<br />People racing the hackathon clock.</p></Reveal>
+            <Reveal><figure className="studio-editorial-image"><Image src="/images/manifest-macbook-studio-v2.webp" alt="A dark MacBook displaying Manifest branding in a warm, focused studio." width={1536} height={1024} sizes="(max-width: 760px) 100vw, 1200px" quality={85}/></figure></Reveal>
+          </div>
         </section>
-        <section className="final-cta">
-          <Reveal>
-            <span className="cta-symbol" aria-hidden="true">
-              <Rocket size={27} strokeWidth={1.3} />
-            </span>
-            <span className="section-kicker">
-              FROM THE FIRST PROMPT TO THE FINISH LINE
-            </span>
-            <h2>Be first to ship with Manifest.</h2>
-            <p>Your next idea is worth finishing. Let’s get it out there.</p>
-            <WaitlistForm />
-          </Reveal>
+
+        <ProjectExamples />
+
+        <div className="studio-plans studio-light"><PricingSection /></div>
+
+        <section className="studio-faq studio-light" id="faq" aria-labelledby="faq-title">
+          <div className="studio-container studio-faq-grid"><Reveal><h2 id="faq-title">A little<br /><em>more clarity.</em></h2><p>Good questions.<br />Straight answers.</p></Reveal><div>{faqs.map(([question, answer]) => <details key={question}><summary>{question}<ChevronDown size={18}/></summary><p>{answer}</p></details>)}</div></div>
+        </section>
+
+        <section className="studio-access" id="early-access" aria-labelledby="access-title">
+          <div className="studio-container studio-access-grid"><Reveal><h2 id="access-title">The next chapter<br />starts with<br /><em>your idea.</em></h2><p>Manifest is in development.<br />Be there when early access opens.</p></Reveal><Reveal delay={0.1} className="studio-access-form"><WaitlistForm id="waitlist"/></Reveal></div>
         </section>
       </main>
-      <footer className="site-footer">
-        <div>
-          <Brand />
-          <span className="footer-tagline">From prompt to production.</span>
-        </div>
-        <span className="copyright">
-          © {new Date().getFullYear()} Manifest AI
-        </span>
-        <nav aria-label="Legal">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="#" aria-label="Back to top">
-            Back to top <ArrowUpRight size={13} />
-          </a>
-        </nav>
-      </footer>
-    </>
-  );
-}
-function CircleIcon({ size = 18 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-    >
-      <path d="M3 14 10 21a10 10 0 0 1-7-7Zm-1-4 12 12a10 10 0 0 0 3-1L3 7a10 10 0 0 0-1 3Zm3-6 15 15A10 10 0 0 0 5 4Z" />
-    </svg>
-  );
+      <footer className="studio-footer"><div className="studio-container"><div className="studio-footer-top"><Brand /><p>From prompt to production.</p><div><Link href="/signin">Sign in <ArrowUpRight size={13}/></Link><Link href="/privacy">Privacy</Link><Link href="/terms">Terms</Link></div></div><div className="studio-footer-word" aria-hidden="true">Manifest</div><div className="studio-footer-bottom"><span>© {new Date().getFullYear()} Manifest AI</span></div></div></footer>
+    </div>);
 }
